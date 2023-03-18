@@ -36,7 +36,7 @@ void main(List<String> arguments) async {
     }
 
     if (gitDiffOutput.trim().isEmpty) {
-      print('No changes detected. No commit message generated.');
+      print("No changes found. Don't forget to stage your changes!");
     } else {
       String commitMessage = await generateCommitMessage(gitDiffOutput, apiKey);
       print('Generated commit message: $commitMessage');
