@@ -112,7 +112,7 @@ Future<String> generateCommitMessage(String diff, String apiKey) async {
     int? selectedIndex;
     do {
       stdout.write('Select a commit message (1-${choices.length}): ');
-      selectedIndex = int.tryParse(stdin.readLineSync() ?? '0');
+      selectedIndex = int.tryParse(stdin.readLineSync() ?? '-1');
     } while (selectedIndex == null ||
         selectedIndex < 1 ||
         selectedIndex > choices.length);
