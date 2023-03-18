@@ -8,6 +8,9 @@ import 'package:process_run/process_run.dart';
 final apiKeyFilePath = '.commit_ai_api_key';
 
 void main(List<String> arguments) async {
+  // Check if git is installed
+  await checkGitInstallation();
+
   final parser = ArgParser()
     ..addFlag('set_api_key', abbr: 's', help: 'Set a new OpenAI API key')
     ..addFlag('show_diff', abbr: 'd', help: 'Show the git diff output')
@@ -42,6 +45,18 @@ void main(List<String> arguments) async {
       print('Generated commit message: $commitMessage');
       await commitChanges(commitMessage);
     }
+  }
+}
+
+Future<void> checkGitInstallation() async {
+  try {
+    final gitVersionResult = await Process.run('git', ['--version']);
+    if (gitVersionResult.exitCode != 0 || gitVersionResult.stdout.isEmpty) {
+      throw Exception('Git not found');
+    }
+  } catch (e) {
+    print('Error: Git is not installed or not found in your system\'s PATH.');
+    exit(1);
   }
 }
 
@@ -127,8 +142,8 @@ Future<String> generateCommitMessage(String diff, String apiKey) async {
 }
 
 Future<void> commitChanges(String commitMessage) async {
-  ProcessResult result =
-      await runExecutableArguments('git', ['commit', '-a', '-m', commitMessage]);
+  ProcessResult result = await runExecutableArguments(
+      'git', ['commit', '-a', '-m', commitMessage]);
 
   if (result.exitCode == 0) {
     print('Changes committed successfully.');
