@@ -18,7 +18,7 @@ git clone https://github.com/tommyle/commit_ai.git
 2. Compile the app to a native executable:
 
 ```bash
-dart compile exe lib/commit_ai.dart -o build/_commit_ai
+dart compile exe lib/commit_ai.dart -o build/commit_ai
 ```
 
 ## Usage
