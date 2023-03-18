@@ -40,6 +40,7 @@ void main(List<String> arguments) async {
     } else {
       String commitMessage = await generateCommitMessage(gitDiffOutput, apiKey);
       print('Generated commit message: $commitMessage');
+      await commitChanges(commitMessage);
     }
   }
 }
@@ -75,7 +76,8 @@ Future<String?> getApiKey() async {
 }
 
 Future<String> getGitDiff() async {
-  ProcessResult result = await runExecutableArguments('git', ['diff']);
+  ProcessResult result =
+      await runExecutableArguments('git', ['diff', '--cached']);
 
   return result.stdout;
 }
@@ -121,5 +123,16 @@ Future<String> generateCommitMessage(String diff, String apiKey) async {
     print(
         'Error: Failed to generate commit message. Status code: ${response.statusCode}');
     exit(1);
+  }
+}
+
+Future<void> commitChanges(String commitMessage) async {
+  ProcessResult result =
+      await runExecutableArguments('git', ['commit', '-a', '-m', commitMessage]);
+
+  if (result.exitCode == 0) {
+    print('Changes committed successfully.');
+  } else {
+    print('Error: Failed to commit changes.\n${result.stderr}');
   }
 }
