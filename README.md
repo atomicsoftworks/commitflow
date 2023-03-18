@@ -7,6 +7,12 @@ A command-line application built with Dart that generates git commit messages us
 - Dart SDK (latest version): https://dart.dev/get-dart
 - A valid OpenAI API key: https://beta.openai.com/signup/
 
+## Run without compiling
+
+```bash
+dart run lib/commit_ai.dart
+```
+
 ## Installation
 
 1. Clone the repository:
