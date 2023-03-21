@@ -19,6 +19,9 @@ jobs:
       - name: Print PATH
         run: echo $PATH
 
+      - name: Print Dart SDK bin directory
+        run: ls /opt/hostedtoolcache/dart-sdk/bin
+
       - name: Install dependencies
         run: /opt/hostedtoolcache/dart-sdk/bin/pub get
 
