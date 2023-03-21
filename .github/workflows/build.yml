@@ -16,8 +16,8 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
 
-      - name: Install dependencies
-        run: pub get
+      # - name: Install dependencies
+      #   run: pub get
 
       - name: Build for macOS
         if: runner.os == 'macOS'
@@ -52,8 +52,8 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
 
-      - name: Install dependencies
-        run: pub get
+      # - name: Install dependencies
+      #   run: pub get
 
       - name: Build for macOS
         if: runner.os == 'macOS'
