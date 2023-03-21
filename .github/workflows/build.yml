@@ -22,13 +22,17 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Build for app
-        run: |
-          if [[ "${{ runner.os }}" == "Windows" ]]; then
-            dart compile exe lib/main.dart -o commitflow-${{ runner.os }}.exe
-          else
-            dart compile exe lib/main.dart -o commitflow-${{ runner.os }}
-          fi
+      - name: Build for macOS
+        if: runner.os == 'macOS'
+        run: dart compile exe bin/main.dart -o commitflow-${{ runner.os }}
+
+      - name: Build for Linux
+        if: runner.os == 'Linux'
+        run: dart compile exe bin/main.dart -o commitflow-${{ runner.os }}
+
+      - name: Build for Windows
+        if: runner.os == 'Windows'
+        run: dart compile exe bin/main.dart -o commitflow-${{ runner.os }}.exe
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
