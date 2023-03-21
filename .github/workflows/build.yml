@@ -13,17 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Dart SDK
-        run: |
-          wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/sdk/dartsdk-linux-x64-release.zip
-          unzip dartsdk-linux-x64-release.zip
-          export PATH="$PATH:`pwd`/dart-sdk/bin"
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
 
       - name: Print PATH
         run: echo $PATH
 
       - name: Install dependencies
-        run: pub get
+        run: /opt/hostedtoolcache/dart-sdk/bin/pub get
 
       - name: Build for macOS
         if: runner.os == 'macOS'
