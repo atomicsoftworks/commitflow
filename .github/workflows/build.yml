@@ -17,6 +17,12 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
 
+      - name: Print working directory
+        run: pwd
+
+      - name: Print current directory
+        run: ls
+
       - name: Build for ${{ matrix.os }}
         run: dart compile exe main.dart -o commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
 
