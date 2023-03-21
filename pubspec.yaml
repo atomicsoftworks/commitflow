@@ -1,5 +1,5 @@
 name: commitflow
-description: A command-line application that generates git commit messages using OpenAI's ChatGPT
+description: CommittFlow generates git commit messages using OpenAI's ChatGPT
 version: 1.0.1
 homepage: https://www.commitflow.com
 environment:
