@@ -16,6 +16,9 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
 
+      - name: Print PATH
+        run: echo $PATH
+
       - name: Install dependencies
         run: pub get
 
