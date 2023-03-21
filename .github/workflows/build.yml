@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Build for ${{ matrix.os }}
+        run: dart compile exe bin/main.dart -o commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: commitflow-${{ matrix.os }}-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
+          path: commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
