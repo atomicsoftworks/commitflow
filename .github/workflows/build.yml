@@ -23,7 +23,12 @@ jobs:
         run: dart pub get
 
       - name: Build for app
-        run: dart compile exe lib/main.dart -o commitflow-${{ runner.os}}
+        run: |
+          if [[ "${runner.os}" == "Windows" ]]; then
+            dart compile exe lib/main.dart -o commitflow-${{ runner.os }}.exe
+          else
+            dart compile exe lib/main.dart -o commitflow-${{ runner.os }}
+          fi
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
