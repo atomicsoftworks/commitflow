@@ -24,7 +24,7 @@ jobs:
         run: ls
 
       - name: Build for ${{ matrix.os }}
-        run: dart compile exe main.dart -o commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
+        run: dart compile exe lib/main.dart -o commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
