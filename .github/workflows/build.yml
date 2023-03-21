@@ -24,15 +24,15 @@ jobs:
 
       - name: Build for macOS
         if: runner.os == 'macOS'
-        run: dart compile exe lib/main.dart -o commitflow-${{ runner.os }}
+        run: dart compile exe lib/commitflow.dart -o commitflow-${{ runner.os }}
 
       - name: Build for Linux
         if: runner.os == 'Linux'
-        run: dart compile exe lib/main.dart -o commitflow-${{ runner.os }}
+        run: dart compile exe lib/commitflow.dart -o commitflow-${{ runner.os }}
 
       - name: Build for Windows
         if: runner.os == 'Windows'
-        run: dart compile exe lib/main.dart -o commitflow-${{ runner.os }}.exe
+        run: dart compile exe lib/commitflow.dart -o commitflow-${{ runner.os }}.exe
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2

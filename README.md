@@ -10,7 +10,7 @@ A command-line application built with Dart that generates git commit messages us
 ## Run without compiling
 
 ```bash
-dart run lib/main.dart
+dart run lib/commitflow.dart
 ```
 
 ## Installation
@@ -24,7 +24,7 @@ git clone https://github.com/tommyle/commitflow.git
 2. Compile the app to a native executable:
 
 ```bash
-dart compile exe lib/main.dart -o build/commitflow
+dart compile exe lib/commitflow.dart -o build/commitflow
 ```
 
 ## Usage
