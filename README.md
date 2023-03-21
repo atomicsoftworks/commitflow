@@ -1,4 +1,4 @@
-# Commit AI
+# CommitFlow
 
 A command-line application built with Dart that generates git commit messages using OpenAI's ChatGPT. This app runs `git diff` in the current working directory, sends the output to ChatGPT, and presents multiple commit message suggestions. The user can then choose a message, and the app will commit the changes using the selected message.
 
@@ -10,7 +10,7 @@ A command-line application built with Dart that generates git commit messages us
 ## Run without compiling
 
 ```bash
-dart run lib/commit_ai.dart
+dart run lib/commitflow.dart
 ```
 
 ## Installation
@@ -18,13 +18,13 @@ dart run lib/commit_ai.dart
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/tommyle/commit_ai.git
+git clone https://github.com/tommyle/commitflow.git
 ```
 
 2. Compile the app to a native executable:
 
 ```bash
-dart compile exe lib/commit_ai.dart -o build/commit_ai
+dart compile exe lib/commitflow.dart -o build/commitflow
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ dart compile exe lib/commit_ai.dart -o build/commit_ai
 1. Set your OpenAI API key:
 
 ```bash
-./commit_ai --set_api_key
+./commitflow --set_api_key
 ```
 
    You'll be prompted to enter your API key, which will be saved to a local file for future use.
@@ -40,7 +40,7 @@ dart compile exe lib/commit_ai.dart -o build/commit_ai
 2. Run the app to generate a commit message and commit the changes:
 
 ```bash
-./commit_ai
+./commitflow
 ```
 
    The app will display multiple commit message suggestions based on the `git diff` output. Choose a message and the app will commit the changes using the selected message.
@@ -50,13 +50,13 @@ dart compile exe lib/commit_ai.dart -o build/commit_ai
 - `--help` or `-h`: Display help information.
 
 ```bash
-./commit_ai --help
+./commitflow --help
 ```
 
 - `--show_diff` or `-d`: Show the git diff output.
 
 ```bash
-./commit_ai --show_diff
+./commitflow --show_diff
 ```
 
 ## License

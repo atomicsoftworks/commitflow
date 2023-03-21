@@ -5,7 +5,7 @@ import 'package:args/args.dart';
 import 'package:process_run/process_run.dart';
 
 // Define the API key file path
-final apiKeyFilePath = '.commit_ai_api_key';
+final apiKeyFilePath = '.commitflow_api_key';
 
 void main(List<String> arguments) async {
   // Check if git is installed
@@ -62,7 +62,7 @@ Future<void> checkGitInstallation() async {
 
 void printUsage(ArgParser parser) {
   print('''
-Usage: dart run bin/my_commit_ai.dart [options]
+Usage: dart run bin/my_commitflow.dart [options]
 
 Options:
 ${parser.usage}
