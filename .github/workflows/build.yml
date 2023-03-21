@@ -1,15 +1,14 @@
 name: Build
 
 on:
+  push:
+    branches: [main]
   release:
     types: [created, edited]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -17,17 +16,62 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
 
-      - name: Print working directory
-        run: pwd
+      - name: Install dependencies
+        run: pub get
 
-      - name: Print current directory
-        run: ls
+      - name: Build for macOS
+        if: runner.os == 'macOS'
+        run: dart compile exe lib/main.dart -o commitflow-macos
 
-      - name: Build for ${{ matrix.os }}
-        run: dart compile exe lib/main.dart -o commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
+      - name: Build for Linux
+        if: runner.os == 'Linux'
+        run: dart compile exe lib/main.dart -o commitflow-linux
 
-      - name: Upload artifact
+      - name: Build for Windows
+        if: runner.os == 'Windows'
+        run: dart compile exe lib/main.dart -o commitflow-windows.exe
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: commitflow-${{ matrix.os }}-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
-          path: commitflow-${{ github.event.release.tag_name }}-${{ github.event.release.target_commitish }}
+          name: commitflow-artifacts
+          path: |
+            commitflow-macos
+            commitflow-linux
+            commitflow-windows.exe
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: pub get
+
+      - name: Build for macOS
+        if: runner.os == 'macOS'
+        run: dart compile exe lib/main.dart -o commitflow-macos-${{ github.event.release.tag_name }}
+
+      - name: Build for Linux
+        if: runner.os == 'Linux'
+        run: dart compile exe lib/main.dart -o commitflow-linux-${{ github.event.release.tag_name }}
+
+      - name: Build for Windows
+        if: runner.os == 'Windows'
+        run: dart compile exe lib/main.dart -o commitflow-windows-${{ github.event.release.tag_name }}.exe
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: commitflow-release-artifacts-${{ github.event.release.tag_name }}
+          path: |
+            commitflow-macos-${{ github.event.release.tag_name }}
+            commitflow-linux-${{ github.event.release.tag_name }}
+            commitflow-windows-${{ github.event.release.tag_name }}.exe
