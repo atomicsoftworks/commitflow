@@ -26,9 +26,9 @@ jobs:
 
       - name: Build for multiple platforms
         run: |
-          docker run --rm -v "$(pwd):/app" -w "/app" google/dart:2.15.0 bash -c "dart compile exe bin/main.dart -o commitflow-linux"
-          docker run --rm -v "$(pwd):/app" -w "/app" -e DART_VM_OPTIONS="--enable-isolate-groups" apple/dart:2.15.0 bash -c "dart compile exe bin/main.dart -o commitflow-macos"
-          docker run --rm -v "$(pwd):/app" -w "/app" mcr.microsoft.com/dotnet/sdk:6.0-focal bash -c "apt-get update && apt-get install -y clang libc6-dev-i386 && dart compile exe bin/main.dart -o commitflow-windows.exe"
+          docker run --rm -v "$(pwd):/app" -w "/app" google/dart:2.15.0 bash -c "dart compile exe lib/main.dart -o commitflow-linux"
+          docker run --rm -v "$(pwd):/app" -w "/app" -e DART_VM_OPTIONS="--enable-isolate-groups" apple/dart:2.15.0 bash -c "dart compile exe lib/main.dart -o commitflow-macos"
+          docker run --rm -v "$(pwd):/app" -w "/app" mcr.microsoft.com/dotnet/sdk:6.0-focal bash -c "apt-get update && apt-get install -y clang libc6-dev-i386 && dart compile exe lib/main.dart -o commitflow-windows.exe"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
@@ -56,9 +56,9 @@ jobs:
 
       - name: Build for multiple platforms
         run: |
-          docker run --rm -v "$(pwd):/app" -w "/app" google/dart:2.15.0 bash -c "dart compile exe bin/main.dart -o commitflow-linux"
-          docker run --rm -v "$(pwd):/app" -w "/app" -e DART_VM_OPTIONS="--enable-isolate-groups" apple/dart:2.15.0 bash -c "dart compile exe bin/main.dart -o commitflow-macos"
-          docker run --rm -v "$(pwd):/app" -w "/app" mcr.microsoft.com/dotnet/sdk:6.0-focal bash -c "apt-get update && apt-get install -y clang libc6-dev-i386 && dart compile exe bin/main.dart -o commitflow-windows.exe"
+          docker run --rm -v "$(pwd):/app" -w "/app" google/dart:2.15.0 bash -c "dart compile exe lib/main.dart -o commitflow-linux"
+          docker run --rm -v "$(pwd):/app" -w "/app" -e DART_VM_OPTIONS="--enable-isolate-groups" apple/dart:2.15.0 bash -c "dart compile exe lib/main.dart -o commitflow-macos"
+          docker run --rm -v "$(pwd):/app" -w "/app" mcr.microsoft.com/dotnet/sdk:6.0-focal bash -c "apt-get update && apt-get install -y clang libc6-dev-i386 && dart compile exe lib/main.dart -o commitflow-windows.exe"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
