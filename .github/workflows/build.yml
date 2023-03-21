@@ -24,7 +24,7 @@ jobs:
 
       - name: Build for app
         run: |
-          if [[ "${runner.os}" == "Windows" ]]; then
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
             dart compile exe lib/main.dart -o commitflow-${{ runner.os }}.exe
           else
             dart compile exe lib/main.dart -o commitflow-${{ runner.os }}
