@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          sdk: ${{ matrix.sdk }}
 
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
@@ -19,11 +21,8 @@ jobs:
       - name: Print PATH
         run: echo $PATH
 
-      - name: Print Dart SDK bin directory
-        run: ls /opt/hostedtoolcache/dart-sdk/bin
-
       - name: Install dependencies
-        run: /opt/hostedtoolcache/dart-sdk/bin/pub get
+        run: dart pub get
 
       - name: Build for macOS
         if: runner.os == 'macOS'
